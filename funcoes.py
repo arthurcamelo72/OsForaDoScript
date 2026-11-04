@@ -62,3 +62,25 @@ def afundados(frota, tabuleiro):
             if afundou:
                 contador += 1
     return contador
+
+def posicao_valida(frota, linha, coluna, orientacao, tamanho):
+    novas = define_posicoes(linha, coluna, orientacao, tamanho)
+    for posicao in novas:
+        if posicao[0] < 0 or posicao[0] > 9 or posicao[1] < 0 or posicao[1] > 9:
+            return False
+    for nome in frota:
+        for navio in frota[nome]:
+            for posicao in navio:
+                if posicao in novas:
+                    return False
+    return True
+
+frota = {}
+
+# cada item é [nome, tamanho, quantidade], na ordem do maior para o menor
+navios = [
+    ['porta-aviões', 4, 1],
+    ['navio-tanque', 3, 2],
+    ['contratorpedeiro', 2, 3],
+    ['submarino', 1, 4],
+]
